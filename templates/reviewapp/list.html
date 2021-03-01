@@ -1,0 +1,20 @@
+{% extends '../base.html' %}
+
+{% block header %}
+<div class="alert alert-primary" role="alert">
+    <h3>Review app</h3>
+</div>
+{% endblock header %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<div class="container">
+    review list!
+    <p>
+    <a href="{% url 'logout' %}">logout</a> 
+    </p>
+</div>
+{% else %}
+please login
+{% endif %}
+{% endblock content %}
