@@ -15,6 +15,8 @@ def signupfunc(request):
             return redirect('../../reviewapp/list')
         except IntegrityError:
             return render(request, 'usermanage/signup.html', {'error':'このユーザーは登録されています。'})
+    else:
+        return render(request, 'usermanage/signup.html', {})
     return render(request, 'usermanage/signup.html', {})
 
 def loginfunc(request):

@@ -1,19 +1,37 @@
 {% extends '../base.html' %}
-
-{% block header %}
-<div class="alert alert-primary" role="alert">
-    <h3>Review app</h3>
-</div>
+{% load static %}
+<!--reset css-->
+<link rel="stylesheet" type="text/css" href="{% static 'reset.css' %}">
+{% block header %}  
+<link rel="stylesheet" type="text/css" href="{% static 'list.css' %}">
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">TodoList</h1>
+    <p class="lead">TodoListを作成して生産的な毎日を過ごしましょう</p>
+  </div>
+</div
 {% endblock header %}
 
 {% block content %}
 {% if user.is_authenticated %}
+
 <div class="container">
-    review list!
-    <p>
-    <a href="{% url 'logout' %}">logout</a> 
-    </p>
+  {% for item in object_list %}
+  <div class="card">
+      <h5 class="card-header">{{ item.title }}</h5>
+      <div class="card-body">
+          <h5 class="card-title">投稿者:{{ item.author }}</h5>
+          <h5 class="card-title">レビューが参考になった人:{{ item.useful_review }}</h5>
+          <a href="{% url 'detail' item.pk %}" class="btn btn-primary">詳しく見る</a>
+      </div>
+  </div>
+  {% endfor %}
+  <p class='top-logout-btn'>
+  <a href="{% url 'logout' %}" class="btn btn-primary">logout</a> 
+  <a href="#" class="btn btn-secondary my-2">トップに戻る</a>
+  </p>
 </div>
+
 {% else %}
 please login
 {% endif %}
